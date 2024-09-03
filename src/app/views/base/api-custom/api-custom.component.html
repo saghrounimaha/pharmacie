@@ -1,0 +1,69 @@
+<c-row ngPreserveWhitespaces>
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-header>
+          <strong>Table Customers </strong>
+        </c-card-header>
+        <c-card-body>
+          <div *ngIf="isLoading" class="spinner">Loading...</div>
+          <table [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+          <thead class="text-nowrap text-truncate">
+          <tr>
+            <th class="bg-body-tertiary text-center">Numéro</th>
+            <th class="bg-body-tertiary text-center">permalink</th>
+            <th class="bg-body-tertiary text-center">table </th>
+            <th class="bg-body-tertiary text-center">aksi</th>
+            <th class="bg-body-tertiary text-center">kolom</th>
+            <th class="bg-body-tertiary text-center">order by</th>
+            <th class="bg-body-tertiary text-center">sub query</th>
+            <th class="bg-body-tertiary text-center">sql where</th>
+            <th class="bg-body-tertiary text-center">nama</th>
+            <th class="bg-body-tertiary text-center">keterangan</th>
+            <th class="bg-body-tertiary text-center">parameter</th>
+            <th class="bg-body-tertiary text-center">parameters</th>
+            <th class="bg-body-tertiary text-center">method type</th>
+            <th class="bg-body-tertiary text-center">responses</th>
+            <th class="bg-body-tertiary text-center">Action</th>
+          </tr>
+          </thead>    
+      <tbody>
+            @for (ApiCustom of paginatedApiCustom; track ApiCustom.id; let i = $index) {
+              <tr class="">
+                <td class="text-center">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td> <!-- Numéro de ligne -->
+                <td class="text-center">{{ ApiCustom.permalink }}</td>
+                <td class="text-center">{{ ApiCustom.tabel }}</td>
+                <td class="text-center">{{ ApiCustom.aksi }}</td>
+                <td class="text-center">{{ ApiCustom.kolom }}</td>
+                <td class="text-center">{{ ApiCustom.orderby }}</td>
+                <td class="text-center">{{ ApiCustom.sub_query_1 }}</td>
+                <td class="text-center">{{ ApiCustom.sql_where }}</td>
+                <td class="text-center">{{ ApiCustom.nama }}</td>
+                <td class="text-center">{{ ApiCustom.keterangan }}</td>
+                <td class="text-center">{{ ApiCustom.parameter }}</td>
+                <td class="text-center">{{ ApiCustom.parameters }}</td>
+                <td class="text-center">{{ ApiCustom.method_type }}</td>
+                <td class="text-center">{{ ApiCustom.responses }}</td>   
+             <td class="text-center ">
+                  <a >
+              <!-- <button (click)="scrollToForm(); getPrivilegesRoleById(privilegeRole.id)" type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Update</button> -->
+              <button type="button" class=" text-center focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:focus:ring-yellow-900">Update</button>
+            </a>
+            <button type="submit" (click)="deleteCustomer(ApiCustom.id)" class=" text-center focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+          </td>
+  
+              </tr>
+            }
+          </tbody>
+  </table>
+  
+  <div class="pagination flex justify-between items-center mt-4">
+  <button (click)="goToPreviousPage()" [disabled]="currentPage === 1" class="btn btn-primary">Previous</button>
+  <span>Page {{ currentPage }} of {{ getTotalPages() }}</span>
+  <button (click)="goToNextPage()" [disabled]="currentPage === getTotalPages()" class="btn btn-primary">Next</button>
+  </div>
+  
+  </c-card-body>
+  </c-card>
+  </c-col>
+  </c-row>
+  

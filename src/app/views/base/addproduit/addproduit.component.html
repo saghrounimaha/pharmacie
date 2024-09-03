@@ -1,0 +1,103 @@
+<form [formGroup]="productForm" (ngSubmit)="addProduit()" class="max-w-sm mx-auto justify-center mt-8">
+  <!-- Numéro de Produit -->
+  <div class="mb-1">
+    <label for="numprod" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Numéro de Produit</label>
+    <input formControlName="numprod" type="text" id="numprod" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+    <div *ngIf="submitted && productForm.controls['numprod'].invalid" class="text-danger">
+      Le numéro de produit est requis.
+    </div>
+  </div>
+
+  <!-- Libellé Produit -->
+  <div class="mb-1">
+    <label for="lib_prod" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Libellé Produit</label>
+    <input formControlName="lib_prod" type="text" id="lib_prod" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+    <div *ngIf="submitted && productForm.controls['lib_prod'].invalid" class="text-danger">
+      Le libellé produit est requis.
+    </div>
+  </div>
+
+  <!-- Code Barre -->
+  <div class="mb-1">
+    <label for="cb" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Code Barre</label>
+    <input formControlName="cb" type="text" id="cb" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+    <div *ngIf="submitted && productForm.controls['cb'].invalid" class="text-danger">
+      Le code barre est requis.
+    </div>
+  </div>
+
+  <!-- Libellé Code Barre -->
+  <div class="mb-1">
+    <label for="lib_cb" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Libellé Code Barre</label>
+    <input formControlName="lib_cb" type="text" id="lib_cb" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+    <div *ngIf="submitted && productForm.controls['lib_cb'].invalid" class="text-danger">
+      Le libellé code barre est requis.
+    </div>
+  </div>
+
+  <!-- Présence Code Barre -->
+  <div class="mb-1">
+    <label for="pres_cb" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Présence Code Barre</label>
+    <input formControlName="pres_cb" type="text" id="pres_cb" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+    <div *ngIf="submitted && productForm.controls['pres_cb'].invalid" class="text-danger">
+      La présence du code barre est requise.
+    </div>
+  </div>
+
+  <!-- Libellé DCI -->
+  <div class="mb-1">
+    <label for="lib_dci" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Libellé DCI</label>
+    <input formControlName="lib_dci" type="text" id="lib_dci" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+    <div *ngIf="submitted && productForm.controls['lib_dci'].invalid" class="text-danger">
+      Le libellé DCI est requis.
+    </div>
+  </div>
+
+  <!-- ID Dépôt -->
+  <div class="mb-1">
+    <label for="id_depot" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">ID Dépôt</label>
+    <select formControlName="id_depot" id="id_depot" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+      <option value="">Choisir un dépôt</option>
+      <option *ngFor="let depot of depots" [value]="depot.id">{{ depot.id }}</option>
+    </select>
+    <div *ngIf="submitted && productForm.controls['id_depot'].invalid" class="text-danger">
+      L'ID dépôt est requis.
+    </div>
+  </div>
+
+  <!-- ID Section -->
+  <div class="mb-1">
+    <label for="id_section" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">ID Section</label>
+    <select formControlName="id_section" id="id_section" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+      <option value="">Choisir une section</option>
+      <option *ngFor="let section of sections" [value]="section.id">{{ section.id }}</option>
+    </select>
+    <div *ngIf="submitted && productForm.controls['id_section'].invalid" class="text-danger">
+      L'ID section est requis.
+    </div>
+  </div>
+
+  <!-- Libellé Section -->
+  <div class="mb-1">
+    <label for="lib_section" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Libellé Section</label>
+    <input formControlName="lib_section" type="text" id="lib_section" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+    <div *ngIf="submitted && productForm.controls['lib_section'].invalid" class="text-danger">
+      Le libellé section est requis.
+    </div>
+  </div>
+
+  <!-- Présence Produit -->
+  <div class="mb-1">
+    <label for="pres_prod" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Présence Produit</label>
+    <input formControlName="pres_prod" type="text" id="pres_prod" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+    <div *ngIf="submitted && productForm.controls['pres_prod'].invalid" class="text-danger">
+      La présence du produit est requise.
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="flex justify-between mt-4">
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Ajouter</button>
+    <button type="button" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700" (click)="resetForm()">Réinitialiser</button>
+  </div>
+</form>

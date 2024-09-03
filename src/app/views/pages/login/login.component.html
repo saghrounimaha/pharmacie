@@ -1,0 +1,68 @@
+<div class="bg-light dark:bg-transparent min-vh-100 d-flex flex-row align-items-center">
+  <c-container breakpoint="md">
+    <c-row class="justify-content-center">
+      <c-col lg="10" xl="8">
+        <c-card-group>
+          <c-card class="p-4">
+            <c-card-body>
+              <form cForm [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <h2 class="font-bold text-blue-900 text-lg">Login</h2>
+                <h3 class="text-body-secondary font-bold text-blue-900 mb-2">Sign In to your account</h3>
+                <c-input-group  for="email" class="mb-3">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilUser"></svg>
+                  </span>
+                  <input formControlName="email" type="email" id="email" autoComplete="email" cFormControl placeholder="email" />
+                  <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="invalid-feedback">
+                    Please enter your email.
+                  </div>
+                </c-input-group>
+                <c-input-group for="password"  class="mb-4">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilLockLocked"></svg>
+                  </span>
+                  <input formControlName="password" 
+                  type="password" id="password"
+                    autoComplete="current-password"
+                    cFormControl
+                    placeholder="Password"
+                    type="password"
+                  />
+                  <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="invalid-feedback">
+                    Please enter your password
+                  </div>
+                </c-input-group>
+                <c-row>
+                  <c-col xs="6">
+                    <button type="submit" cButton class="px-4 font-bold" color="primary">
+                      Login
+                    </button>
+                  </c-col>
+                  <c-col class="text-right" xs="6">
+                    <button [routerLink]="['/forgot']" routerLinkActive="router-link-active"   cButton class="px-0 font-bold" color="link">
+                      Forgot password?
+                    </button>
+                  </c-col>
+                </c-row>
+              </form>
+            </c-card-body>
+          </c-card>
+          <c-card [ngStyle]="{'minWidth.%': 44}" class="text-white bg-primary py-5">
+            <c-card-body class="text-center">
+              <div>
+                <h2 class="font-bold">Sign up</h2>
+                <p class="font-bold">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+                <button type="submit" [active]="true" cButton class="mt-3 font-bold" color="primary" routerLink="/register">
+                  Register Now!
+                </button>
+              </div>
+            </c-card-body>
+          </c-card>
+        </c-card-group>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>

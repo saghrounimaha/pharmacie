@@ -1,0 +1,48 @@
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong> Table Privilege</strong>
+      </c-card-header>
+      <c-card-body>
+        <div *ngIf="isLoading" class="spinner">Loading...</div>
+        <table [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+        <thead class="text-nowrap text-truncate">
+        <tr>
+          <th class="bg-body-tertiary text-center">name</th>
+          <th class="bg-body-tertiary text-center">is superadmin ?</th>
+          <th class="bg-body-tertiary text-center">theme color</th>
+          <th class="bg-body-tertiary text-center">Action</th>
+
+        </tr>
+        </thead>
+        <tbody>
+          @for (privilege of privileges; track privilege.id; let i = $index) {
+            <tr class="text-center">
+                  <td class="text-center">
+                    <div>{{ privilege.name }}</div>
+                    <div class="small text-body-secondary text-nowrap">
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    {{ privilege.is_superadmin }}
+                  </td>
+              <td class="text-center">
+                {{ privilege.theme_color }}
+           </td>
+
+       <td class=" items-center text-center">
+          <a [routerLink]="['/updateDepot', privilege.id]">
+            <button type="submit" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Update</button>
+          </a>
+          <button type="submit" (click)="deletePrivilege(privilege.id)" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+        </td> 
+
+            </tr>
+          }
+        </tbody>
+      </table>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

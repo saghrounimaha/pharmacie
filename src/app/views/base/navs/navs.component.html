@@ -1,0 +1,109 @@
+<form [formGroup]="searchForm" (ngSubmit)="searchProducts()" class="flex max-w-sm mx-auto justify-center mt-20">
+  <div class="mb-5">
+    <label for="numprod" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numéro de Produit</label>
+    <input type="text" formControlName="numprod" id="numprod" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+  </div>
+  <div class="mb-5">
+    <label for="lib_prod" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Libellé Produit</label>
+    <input type="text" formControlName="lib_prod" id="lib_prod" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+  </div>
+  <div class="mb-5"> 
+    <label for="cb" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CB</label>
+    <input type="text" formControlName="cb" id="cb" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+  </div>
+  <div class="mb-5"> 
+    <label for="lib_cb" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Libellé CB</label>
+    <input type="text" formControlName="lib_cb" id="lib_cb" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+  </div>
+  <div class="mb-5">
+    <label for="pres_cb" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Présentation CB</label>
+    <input type="text" formControlName="pres_cb" id="pres_cb" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+  </div>
+  <div class="mb-5">
+    <label for="lib_section" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Libellé Section</label>
+    <input type="text" formControlName="lib_section" id="lib_section" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+  </div>
+  <div class="mb-5">
+    <label for="pres_prod" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Présentation Produit</label>
+    <input type="text" formControlName="pres_prod" id="pres_prod" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+  </div>
+  <div class="mb-5">
+    <label for="code_depot" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Code Dépôt</label>
+    <input type="text" formControlName="code_depot" id="code_depot" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+  </div>
+  <div class="mb-5">
+    <label for="code_section" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Code Section</label>
+    <input type="text" formControlName="code_section" id="code_section" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+  </div>
+  <div class="mb-5">
+    <label for="active_shop" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Active Shop</label>
+    <input type="checkbox" formControlName="active_shop" id="active_shop" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+  </div>
+  <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Rechercher</button>
+</form>
+
+
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>Table Clients</strong>
+      </c-card-header>
+      <c-card-body>
+        <button type="submit" [routerLink]="['/addProduit']" routerLinkActive="router-link-active" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Add Product</button>
+        <table [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+          <thead class="text-nowrap text-truncate">
+            <tr>
+              <th class="bg-body-tertiary text-center">Numéro</th>
+              <th class="bg-body-tertiary text-center">Numero Produit</th>
+              <th class="bg-body-tertiary text-center">Libellé Produit</th>
+              <th class="bg-body-tertiary text-center">CB</th>
+              <th class="bg-body-tertiary text-center">Libellé CB</th>
+              <th class="bg-body-tertiary text-center">Prés CB</th>
+              <th class="bg-body-tertiary text-center">Libellé DCI</th>
+              <th class="bg-body-tertiary text-center">Depot</th>
+              <th class="bg-body-tertiary text-center">Section</th>
+              <th class="bg-body-tertiary text-center">Libellé Section</th>
+              <th class="bg-body-tertiary text-center">Prés Produit</th>
+              <th class="bg-body-tertiary text-center">Code Depot</th>
+              <th class="bg-body-tertiary text-center">Code Section</th>
+              <th class="bg-body-tertiary text-center">Unité Carton</th>
+              <th class="bg-body-tertiary text-center">Unité Cartouche</th>
+              <th class="bg-body-tertiary text-center">Active Shop</th>
+              <th class="bg-body-tertiary text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of paginatedProducts; let i = index" class="text-center">
+              <td class="text-center">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+              <td>{{ product.numprod }}</td>
+              <td>{{ product.lib_prod }}</td>
+              <td>{{ product.cb }}</td>
+              <td>{{ product.lib_cb }}</td>
+              <td>{{ product.pres_cb }}</td>
+              <td>{{ product.lib_dci }}</td>
+              <td>{{ product.id_depot }}</td>
+              <td>{{ product.id_section }}</td>
+              <td>{{ product.lib_section }}</td>
+              <td>{{ product.pres_prod }}</td>
+              <td>{{ product.code_depot }}</td>
+              <td>{{ product.code_section }}</td>
+              <td>{{ product.unitecarton }}</td>
+              <td>{{ product.unitecartouche }}</td>
+              <td>{{ product.active_shop }}</td>
+              <td class="flex gap-2 items-center text-center">
+                <button type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Update</button>
+                <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-red-900">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pagination flex justify-between items-center mt-4">
+          <button (click)="goToPreviousPage()" [disabled]="currentPage === 1" class="btn btn-primary">Previous</button>
+          <span>Page {{ currentPage }} of {{ getTotalPages() }}</span>
+          <button (click)="goToNextPage()" [disabled]="currentPage === getTotalPages()" class="btn btn-primary">Next</button>
+        </div>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

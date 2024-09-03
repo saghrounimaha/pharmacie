@@ -1,0 +1,70 @@
+<c-row ngPreserveWhitespaces>
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-header>
+          <strong>Table Annonces </strong>
+        </c-card-header>
+        <c-card-body>
+          <table [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+          <thead class="text-nowrap text-truncate">
+          <tr>
+            <th class="bg-body-tertiary text-center">Numéro</th>
+            <th class="bg-body-tertiary text-center">name</th>
+            <th class="bg-body-tertiary text-center">type </th>
+            <th class="bg-body-tertiary text-center">path</th>
+            <th class="bg-body-tertiary text-center">color</th>
+            <th class="bg-body-tertiary text-center">icon</th>
+            <th class="bg-body-tertiary text-center">parent</th>
+            <th class="bg-body-tertiary text-center">is active ?</th>
+            <th class="bg-body-tertiary text-center">is dashboard ?</th>
+            <th class="bg-body-tertiary text-center">privileges </th>
+            <th class="bg-body-tertiary text-center">sorting </th>
+            <th class="bg-body-tertiary text-center">Action</th>
+          </tr>
+          </thead>
+
+          <tbody>
+            @for (Menu of paginatedMenus; track Menu.id; let i = $index) {
+              <tr class="">
+                <td class="text-center">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td> <!-- Numéro de ligne -->
+                <td class="text-center">{{ Menu.name }}</td>
+              <td class="text-center">{{ Menu.type }}</td>
+                <td class="text-center">{{ Menu.path }}</td>
+                <td class="text-center">{{ Menu.color }}</td>
+                <td class="text-center">
+                    <i [class]="Menu.icon"></i>
+                  </td>               
+                 <td class="text-center">{{ Menu.parent_id }}</td>
+                <td class="text-center">{{ Menu.is_active }}</td>
+                <td class="text-center">{{ Menu.is_dashboard }}</td>
+                <td class="text-center">{{ Menu.id_cms_privileges }}</td>
+                <td class="text-center">{{ Menu.sorting }}</td>
+
+
+
+
+                <td class="text-center "> <!-- Centrer les boutons -->
+                  <a >
+              <!-- <button (click)="scrollToForm(); getPrivilegesRoleById(privilegeRole.id)" type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Update</button> -->
+              <button type="button" class=" text-center focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:focus:ring-yellow-900">Update</button>
+            </a>
+            <!-- <button type="submit" (click)="deletePrivilegeRole(privilegeRole.id)" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button> -->
+            <button type="submit" class=" text-center focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+          </td>
+  
+              </tr>
+            }
+          </tbody>
+  </table>
+  
+  <div class="pagination flex justify-between items-center mt-4">
+  <button (click)="goToPreviousPage()" [disabled]="currentPage === 1" class="btn btn-primary">Previous</button>
+  <span>Page {{ currentPage }} of {{ getTotalPages() }}</span>
+  <button (click)="goToNextPage()" [disabled]="currentPage === getTotalPages()" class="btn btn-primary">Next</button>
+  </div>
+  
+  </c-card-body>
+  </c-card>
+  </c-col>
+  </c-row>
+  

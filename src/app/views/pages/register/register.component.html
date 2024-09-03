@@ -1,0 +1,113 @@
+<div class="bg-light dark:bg-transparent min-vh-100 d-flex flex-row align-items-center">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col lg="7" md="9" xl="6">
+        <c-card class="mx-4">
+          <c-card-body class="p-4">
+            <form cForm [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+              <h1 class=" text-lg font-bold text-blue-800">Register</h1>
+              <p class="text-body-secondary font-bold mb-4">Create your account</p>
+             <!-- name -->
+              <c-input-group class="mb-3" for="name">
+                <span cInputGroupText>
+                  <svg cIcon name="cilUser"></svg>
+                </span>
+                <input id="name" formControlName="name" type="text" autoComplete="name" cFormControl placeholder="name" />
+                <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched" class="text-red-500 text-xs">
+                  Name is required.
+                </div>
+              </c-input-group>
+              <!-- photo -->
+              <c-input-group for="photo" class="mb-3">
+                <span cInputGroupText>&#64;</span>
+                <input id="photo" type="file" (change)="onFileChange($event)" autoComplete="photo" cFormControl placeholder="photo" />
+                <div *ngIf="imageError" class="text-red-500 text-xs">
+                  {{ imageError }}
+                </div>
+              </c-input-group>
+              <!-- email -->
+              <c-input-group for="email" class="mb-3">
+                <span cInputGroupText>&#64;</span>
+                <input id="email" formControlName="email" type="email" autoComplete="email" cFormControl placeholder="Email" />
+                <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="text-red-500 text-xs">
+                  Email is required.
+                </div>
+              </c-input-group>
+        <!-- password -->
+              <c-input-group for="password"  class="mb-3">
+                <span cInputGroupText>&#64;</span>
+                <input id="password" formControlName="password" type="password" autoComplete="password" cFormControl placeholder="Password" />
+                <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="text-red-500 text-xs">
+                  Password is required.
+                </div>
+              </c-input-group>
+              <!-- status -->
+              <c-input-group for="status" class="mb-3">
+                <span cInputGroupText>&#64;</span>
+                <input  id="status" formControlName="status" type="text" autoComplete="status" cFormControl placeholder="status" />
+                <div *ngIf="registerForm.get('status')?.invalid && registerForm.get('status')?.touched" class="text-red-500 text-xs">
+                  Status is required.
+                </div>
+              </c-input-group>
+            <!-- login -->
+              <c-input-group for="login" class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilLockLocked"></svg>
+                </span>
+                <input id="login" formControlName="login" type="text" autoComplete="login" cFormControl placeholder="login" />
+                <div *ngIf="registerForm.get('login')?.invalid && registerForm.get('login')?.touched" class="text-red-500 text-xs">
+                  Login is required.
+                </div>
+              </c-input-group>
+<!-- code -->
+<c-input-group for="code" class="mb-3">
+  <span cInputGroupText>&#64;</span>
+  <input  id="code" formControlName="code" type="text" autoComplete="code" cFormControl placeholder="code" />
+  <div *ngIf="registerForm.get('code')?.invalid && registerForm.get('code')?.touched" class="text-red-500 text-xs">
+    Code is required.
+  </div>
+</c-input-group>
+<!-- admin client -->
+<c-input-group for="adminclient"  class="mb-3">
+  <span cInputGroupText>&#64;</span>
+  <input  id="adminclient" formControlName="adminclient" type="text" autoComplete="adminclient" cFormControl placeholder="adminclient" />
+  <div *ngIf="registerForm.get('adminclient')?.invalid && registerForm.get('adminclient')?.touched" class="text-red-500 text-xs">
+    Admin Client is required.
+  </div>
+</c-input-group>
+<!-- cms privileges -->
+<c-input-group for="id_cms_privileges"   class="mb-3">
+  <!-- <label for="id_cms_privileges" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Privileges</label> -->
+  <span cInputGroupText>&#64;</span>
+  <select formControlName="id_cms_privileges" id="id_cms_privileges" class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <option selected>Choose a privilege</option>
+    <option *ngFor="let privilege of privileges" [value]="privilege.id">{{ privilege.id }}</option>
+  </select>
+  <div *ngIf="registerForm.get('id_cms_privileges')?.invalid && registerForm.get('id_cms_privileges')?.touched" class="text-red-500 text-xs">
+    CMS Privileges are required.
+  </div>
+</c-input-group>
+
+<!-- depot -->
+
+<c-input-group for="id_depot" class="mb-3">
+  <!-- <label for="id_depot" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Depot</label> -->
+  <span cInputGroupText>&#64;</span>
+  <select formControlName="id_depot" id="id_depot" class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <option selected>Choose a depot</option>
+    <option *ngFor="let depot of depots" [value]="depot.id">{{ depot.id }}</option>
+  </select>
+  <div *ngIf="registerForm.get('id_depot')?.invalid && registerForm.get('id_depot')?.touched" class="text-red-500 text-xs">
+    Depot is required.
+  </div>
+</c-input-group>
+              <div class="d-grid">
+                <button type="submit" class="font-bold" cButton color="success">Create Account</button>
+              </div>
+            </form>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>

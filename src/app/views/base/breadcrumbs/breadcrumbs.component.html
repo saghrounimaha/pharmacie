@@ -1,0 +1,146 @@
+<!-- <c-row ngPreserveWhitespaces>
+  <c-col class="mb-4" xs="12">
+    <c-card>
+      <c-card-header>
+        <strong>Angular Breadcrumbs</strong>
+      </c-card-header>
+      <c-card-body>
+        <p class="text-body-secondary small">
+          The breadcrumb navigation provides links back to each previous page the user navigated
+          through and shows the current location in a website or an application. You don’t have
+          to add separators, because they automatically added in CSS through
+          <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::before">
+            <code>::before</code>
+          </a>
+          and
+          <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/content">
+            <code>content</code>
+          </a>
+          .
+        </p>
+        <app-docs-example href="components/breadcrumb">
+          <c-breadcrumb class="mb-2">
+            @for (item of items; track item; let i = $index, isLast = $last) {
+              <c-breadcrumb-item [active]="isLast" [url]="item.url">
+                {{ item.label }}
+              </c-breadcrumb-item>
+            }
+          </c-breadcrumb>
+          <hr>
+          <c-breadcrumb class="mb-2">
+            @for (item of items.slice(0, 1); track item; let i = $index, isLast = $last) {
+              <c-breadcrumb-item [active]="isLast" [url]="item.url">
+                {{ item.label }}
+              </c-breadcrumb-item>
+            }
+          </c-breadcrumb>
+          <c-breadcrumb class="mb-2">
+            @for (item of items.slice(0, 2); track item; let i = $index, isLast = $last) {
+              <c-breadcrumb-item [active]="isLast" [url]="item.url">
+                {{ item.label }}
+              </c-breadcrumb-item>
+            }
+          </c-breadcrumb>
+          <c-breadcrumb class="mb-2">
+            @for (item of items.slice(0, 3); track item; let i = $index, isLast = $last) {
+              <c-breadcrumb-item [active]="isLast" [url]="item.url">
+                {{ item.label }}
+              </c-breadcrumb-item>
+            }
+          </c-breadcrumb>
+          <c-breadcrumb class="mb-2">
+            @for (item of items.slice(0, 4); track item; let i = $index, isLast = $last) {
+              <c-breadcrumb-item [active]="isLast" [url]="item.url">
+                <span [ngClass]="{'mark': isLast}">{{ item.label }}</span>
+              </c-breadcrumb-item>
+            }
+          </c-breadcrumb>
+          <hr>
+          <c-breadcrumb class="mb-0">
+            <c-breadcrumb-item url="/">
+              Home
+            </c-breadcrumb-item>
+            <c-breadcrumb-item url="/">
+              Library
+            </c-breadcrumb-item>
+            <c-breadcrumb-item url="/">
+              Data
+            </c-breadcrumb-item>
+            <c-breadcrumb-item [active]="true">
+              Bootstrap
+            </c-breadcrumb-item>
+          </c-breadcrumb>
+        </app-docs-example>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <c-col xs="12">
+    <c-card>
+      <c-card-header>
+        <strong>Angular Breadcrumbs</strong> <small>router</small>
+      </c-card-header>
+      <c-card-body>
+        <app-docs-example href="components/breadcrumb#router">
+          <c-breadcrumb-router />
+          <c-breadcrumb-router [items]="items" />
+        </app-docs-example>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row> -->
+
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong> Table Depots</strong>
+      </c-card-header>
+      <c-card-body>
+        <div *ngIf="isLoading" class="spinner">Loading...</div>
+        <table [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+        <thead class="text-nowrap text-truncate">
+        <tr>
+          <th class="bg-body-tertiary text-center">Libelle Depot</th>
+          <th class="bg-body-tertiary text-center">Code</th>
+          <th class="bg-body-tertiary text-center">Code par Calendrier</th>
+          <th class="bg-body-tertiary text-center">Couleur</th>
+          <th class="bg-body-tertiary text-center">Text Couleur</th>
+          <th class="bg-body-tertiary text-center">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (depot of depots; track depot.id; let i = $index) {
+            <tr class="text-center">
+                  <td class="text-center">
+                    <div>{{ depot.lib_depot }}</div>
+                    <div class="small text-body-secondary text-nowrap">
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    {{ depot.code }}
+                  </td>
+              <td class="text-center">
+                {{ depot.cdeParCalendrier }}
+           </td>
+              <td class="text-center">
+                {{ depot.couleur }}
+              </td>
+              <td class="text-center">
+                {{ depot.textcouleur }}
+               </td>
+
+       <td class="items-center text-center">
+          <a [routerLink]="['/updateDepot', depot.id]">
+            <button type="submit" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Update</button>
+          </a>
+          <button type="submit" (click)="deleteDepot(depot.id)" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+        </td>
+
+            </tr>
+          }
+        </tbody>
+      </table>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

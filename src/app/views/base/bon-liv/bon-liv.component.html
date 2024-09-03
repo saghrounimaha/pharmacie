@@ -1,0 +1,70 @@
+<c-row ngPreserveWhitespaces>
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-header>
+          <strong>Table Bon Liv </strong>
+        </c-card-header>
+        <c-card-body>
+          <div *ngIf="isLoading" class="spinner">Loading...</div>
+          <table [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+          <thead class="text-nowrap text-truncate">
+          <tr>
+            <th class="bg-body-tertiary text-center">Numéro</th>
+            <th class="bg-body-tertiary text-center">BL</th>
+            <th class="bg-body-tertiary text-center">ANNEEBL</th>
+            <th class="bg-body-tertiary text-center">DEPOT</th>
+            <th class="bg-body-tertiary text-center">CLIENT</th>
+            <th class="bg-body-tertiary text-center">REFBL</th>
+            <th class="bg-body-tertiary text-center">DATEBL</th>
+            <th class="bg-body-tertiary text-center">LIB_SECTION</th>
+            <th class="bg-body-tertiary text-center">TYPECMD</th>
+            <th class="bg-body-tertiary text-center">LIB_MODEPAIEMENT</th>
+            <th class="bg-body-tertiary text-center">COMMENTAIRE</th>
+
+            
+            <th class="bg-body-tertiary text-center">Action</th>
+  
+  
+          </tr>
+          </thead>
+        
+          <tbody>
+            @for (BON_LIV of paginatedBON_LIV; track BON_LIV.id; let i = $index) {
+              <tr class="">
+                <td class="text-center">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td> 
+                <td class="text-center">{{ BON_LIV.BL }}</td>
+                <td class="text-center">{{ BON_LIV.ANNEEBL }}</td>
+                <td class="text-center">{{ BON_LIV.DEPOT }}</td>
+                <td class="text-center">{{ BON_LIV.CLIENT }}</td>
+                <td class="text-center">{{ BON_LIV.REFBL }}</td>
+                <td class="text-center">{{ BON_LIV.DATEBL }}</td>
+                <td class="text-center">{{ BON_LIV.LIB_SECTION }}</td>
+                <td class="text-center">{{ BON_LIV.TYPECMD }}</td>
+                <td class="text-center">{{ BON_LIV.LIB_MODEPAIEMENT }}</td>
+                <td class="text-center">{{ BON_LIV.COMMENTAIRE }}</td>
+
+                
+
+                <td class="text-center">
+                  <a >
+              <button type="submit" class=" text-center focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:focus:ring-yellow-900">Update</button>
+            </a>
+            <button type="submit" (click)="deleteBonLiv(BON_LIV.BL)" class="text-center focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+          </td>
+  
+              </tr>
+            }
+          </tbody> 
+  </table>
+  
+  <div class="pagination flex justify-between items-center mt-4">
+  <button (click)="goToPreviousPage()" [disabled]="currentPage === 1" class="btn btn-primary">Previous</button>
+  <span>Page {{ currentPage }} of {{ getTotalPages() }}</span>
+  <button (click)="goToNextPage()" [disabled]="currentPage === getTotalPages()" class="btn btn-primary">Next</button>
+  </div>
+  
+  </c-card-body>
+  </c-card>
+  </c-col>
+  </c-row>
+  

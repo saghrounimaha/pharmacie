@@ -1,0 +1,222 @@
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong> Table utilisateur</strong>
+      </c-card-header>
+      <c-card-body>
+        <h2 class="text-body-secondary small">
+Check the user informations 
+        </h2>
+        <div class="relative mb-4">
+          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            </svg>
+          </div>
+          <input type="search"   id="default-search"  [(ngModel)]="searchName"  (input)="searchUsers()" placeholder="Search by name"   class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required />
+          <button 
+            (click)="searchUsers()"   class="absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 text-white font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Search
+          </button>
+        </div>
+        <div *ngIf="isLoading" class="spinner">Loading...</div>
+
+        <table [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+        <thead class="text-nowrap text-truncate">
+        <tr>
+          <th class="bg-body-tertiary text-center">Numéro</th>
+          <th class="bg-body-tertiary text-center ">
+            Photo
+          </th>
+          <th class="bg-body-tertiary text-center">Name</th>
+          <th class="bg-body-tertiary text-center">Email</th>
+          <th class="bg-body-tertiary text-center">Password</th>
+          <th class="bg-body-tertiary text-center">Status</th>
+          <th class="bg-body-tertiary text-center">Login</th>
+          <th class="bg-body-tertiary text-center">Code</th>
+          <th class="bg-body-tertiary text-center">Admin Client</th>
+          <th class="bg-body-tertiary text-center">Is Valid</th>
+          <th class="bg-body-tertiary text-center">Code Depot</th>
+          <th class="bg-body-tertiary text-center">Last Connected</th>
+          <th class="bg-body-tertiary text-center">Privileges</th>
+          <th class="bg-body-tertiary text-center">Depot</th>
+          <th class="bg-body-tertiary text-center">action</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (user of paginatedUsers; track user.id; let i = $index) {
+            <tr class="text-center">
+
+              <td class="text-center">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td> <!-- Numéro de ligne -->
+             
+              <td class="text-center">
+                <img src="http://localhost:3000/{{user.photo}}"/>
+                   </td>   
+              <!-- <img src="http://localhost:3000/upload/images/{{ user.photo }}" alt="User Photo"> -->
+
+              <td class="text-center">
+                    <div>{{ user.name }}</div>
+                    <div class="small text-body-secondary text-nowrap">
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    {{ user.email }}
+                  </td>
+              <td class="text-center">
+                {{ user.password }}
+            </td>
+              <td class="text-center">
+                {{ user.status }}
+              </td>
+              <td class="text-center">
+                {{ user.login }}
+               </td>
+               <td class="text-center">
+                {{ user.code }}
+               </td>
+               <td class="text-center">
+                {{ user.adminclient }}
+               </td>
+               <td class="text-center">
+                {{ user.is_valid }}
+               </td>
+        <td class="text-center">
+                {{ user.code_depot }}
+                             </td>
+        <td class="text-center">
+                {{ user.last_connected }}
+        </td>
+        <td class="text-center">
+                {{ user.id_cms_privileges }}
+        </td>
+        <td class="text-center">
+             {{ user.id_depot }}
+        </td>
+        <td class=" items-center text-center">
+              <a >
+                <button (click)="scrollToForm(); getById(user.id)" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Update</button>
+              </a>
+              <button (click)="deleteUser(user.id)" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+        </td>
+        </tr>
+          }
+        </tbody>
+      </table>
+      <div class="flex justify-between items-center mt-4">
+        <button (click)="goToPreviousPage()" [disabled]="currentPage === 1" class="btn btn-primary">Previous</button>
+        <span>Page {{ currentPage }} of {{ getTotalPages() }}</span>
+        <button (click)="goToNextPage()" [disabled]="currentPage === getTotalPages()" class="btn btn-primary">Next</button>
+      </div>
+
+
+<!-- formualireStart -->
+<form class="mt-30" [formGroup]="UserForm" (ngSubmit)="updateUser()" #formSection id="formSection">
+  <div class="mt-20 border-b border-gray-900/10 pb-12">
+    <h2 class="text-base font-bold text-md leading-7 text-blue-700" >User Update Form</h2>
+    <div class="border-b border-gray-900/10 pb-12">     
+      <div class="col-span-full mt-4">
+        <label for="photo" class="block text-sm font-medium leading-6 text-gray-900">Photo</label>
+        <div class="mt-2 flex items-center gap-x-3">
+          <img *ngIf="currentPhoto" [src]="currentPhoto" alt="User Photo" class="h-12 w-12 rounded-full text-gray-300" />
+          <input type="file" id="photo" (change)="onFileChange($event)" class="sr-only" />
+          <button type="button" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" (click)="triggerFileInput()" >
+            Change
+          </button>
+        </div>
+      </div>
+      <div class="mt-10 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-4">
+          <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
+          <div class="mt-2">
+            <input id="name" formControlName="name" type="text" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            
+          </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <label for="status" class="block text-sm font-medium leading-6 text-gray-900">Status</label>
+          <div class="mt-2">
+            <select id="status" formControlName="status" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+              <option value="">Select status</option>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+            
+          </div>
+        </div>
+       
+
+        <div class="sm:col-span-4">
+          <label for="login" class="block text-sm font-medium leading-6 text-gray-900">Login</label>
+          <div class="mt-2">
+            <input id="login" formControlName="login" type="text" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            
+          </div>
+        </div>
+
+
+        <div class="sm:col-span-4">
+          <label for="code" class="block text-sm font-medium leading-6 text-gray-900">Code</label>
+          <div class="mt-2">
+            <input id="code" formControlName="code" type="text" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <label for="adminclient" class="block text-sm font-medium leading-6 text-gray-900">Admin Client</label>
+          <div class="mt-2">
+            <select id="adminclient" formControlName="adminclient" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+              <option value="" disabled selected>--Sélectionnez--</option>
+              <option value="oui">oui</option>
+              <option value="non">non</option>
+            </select>
+          </div>
+        </div>
+         
+
+        <div class="sm:col-span-4">
+          <label for="code_depot" class="block text-sm font-medium leading-6 text-gray-900">Code_depot</label>
+          <div class="mt-2">
+            <input id="code_depot" formControlName="code_depot" type="text" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          </div>
+        </div>
+
+
+
+        <div class="sm:col-span-3">
+          <label for="id_cms_privileges" class="block text-sm font-medium leading-6 text-gray-900">Privileges</label>
+          <div class="mt-2">
+            <select formControlName="id_cms_privileges" id="id_cms_privileges" name="id_cms_privileges" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+              <option value="">Choose a privilege</option>
+              <option *ngFor="let privilege of privileges" [value]="privilege.id">{{ privilege.id }}</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="sm:col-span-3">
+          <label for="id_depot" class="block text-sm font-medium leading-6 text-gray-900">Depot</label>
+          <div class="mt-2">
+            <select formControlName="id_depot" id="id_depot" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+              <option selected>Choose a depot</option>
+              <option *ngFor="let depot of depots" [value]="depot.id">{{ depot.id }}</option>
+            </select>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+  <div class="mt-6 flex items-center justify-end gap-x-6">
+  <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+  <button type="submit" class="rounded-md bg-yellow-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+  </div>
+  </form>
+  <!-- formualireEnd -->
+
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

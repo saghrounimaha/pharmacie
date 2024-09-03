@@ -1,0 +1,59 @@
+table {
+    width: 100%;
+    font-size: 14px;
+    border-collapse: collapse;
+
+  }
+
+  th, td {
+    text-align: center;
+    vertical-align: middle;
+    border: 5px solid rgb(239, 231, 231);
+
+  }
+
+  th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+
+  td {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  
+  .spinner {
+    position: fixed; /* Utilisez 'fixed' pour qu'il reste visible même pendant le défilement */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.9); /* Fond légèrement transparent */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1000; /* Assurez-vous qu'il est au-dessus des autres éléments */
+    font-size: 1.5rem; /* Taille du texte plus grande */
+    color: #333; /* Couleur du texte */
+    font-weight: bold; /* Texte en gras */
+  }
+  
+  .spinner::before {
+    content: ''; /* Crée un élément pseudo pour l'animation */
+    display: block;
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 5px solid #3498db; /* Couleur de l'animation */
+    animation: spin 1s linear infinite; /* Animation de rotation */
+    margin: 0 auto; /* Centrer le spinner */
+    margin-bottom: 10px; /* Espacement entre le spinner et le texte */
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  

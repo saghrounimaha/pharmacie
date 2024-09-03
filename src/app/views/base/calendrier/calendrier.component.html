@@ -1,0 +1,67 @@
+<c-row ngPreserveWhitespaces>
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-header>
+          <strong>Table Annonces </strong>
+        </c-card-header>
+        <c-card-body>
+          <div *ngIf="isLoading" class="spinner">Loading...</div>
+          <table [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+          <thead class="text-nowrap text-truncate">
+          <tr>
+            <th class="bg-body-tertiary text-center">Numéro</th>
+            <th class="bg-body-tertiary text-center">depot</th>
+            <th class="bg-body-tertiary text-center">section </th>
+            <th class="bg-body-tertiary text-center">groupe</th>
+            <th class="bg-body-tertiary text-center">Jour</th>
+            <th class="bg-body-tertiary text-center">mois</th>
+            <th class="bg-body-tertiary text-center">annee</th>
+            <th class="bg-body-tertiary text-center">date</th>
+            <th class="bg-body-tertiary text-center">code depot</th>
+            <th class="bg-body-tertiary text-center">code section </th>
+
+
+            <th class="bg-body-tertiary text-center">Action</th>
+          </tr>
+          </thead>
+
+          <tbody>
+            @for (Calendrier of paginatedCalendriers; track Calendrier.id; let i = $index) {
+              <tr class="">
+                <td class="text-center">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td> <!-- Numéro de ligne -->
+                <td class="text-center">{{ Calendrier.id_depot }}</td>
+              <td class="text-center">{{ Calendrier.id_section }}</td>
+                <td class="text-center">{{ Calendrier.id_groupe }}</td>
+                <td class="text-center">{{ Calendrier.jour }}</td>
+                <td class="text-center">{{ Calendrier.mois }}</td>
+                <td class="text-center">{{ Calendrier.annee }}</td>
+                <td class="text-center">{{ Calendrier.date }}</td>
+                <td class="text-center">{{ Calendrier.code_depot }}</td>
+                <td class="text-center">{{ Calendrier.code_section }}</td>
+
+
+
+                <td class="text-center "> <!-- Centrer les boutons -->
+                  <a >
+              <!-- <button (click)="scrollToForm(); getPrivilegesRoleById(privilegeRole.id)" type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Update</button> -->
+              <button type="button" class=" text-center focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:focus:ring-yellow-900">Update</button>
+            </a>
+            <button type="submit" (click)="deleteCalendrier(Calendrier.id)" class=" text-center focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+          </td>
+  
+              </tr>
+            }
+          </tbody>
+  </table>
+  
+  <div class="pagination flex justify-between items-center mt-4">
+  <button (click)="goToPreviousPage()" [disabled]="currentPage === 1" class="btn btn-primary">Previous</button>
+  <span>Page {{ currentPage }} of {{ getTotalPages() }}</span>
+  <button (click)="goToNextPage()" [disabled]="currentPage === getTotalPages()" class="btn btn-primary">Next</button>
+  </div>
+  
+  </c-card-body>
+  </c-card>
+  </c-col>
+  </c-row>
+  

@@ -1,0 +1,62 @@
+<div class="container">
+    <h2 class="font-bold text-blue-800 mb-2">Ajouter une commande</h2>
+    <form [formGroup]="commandeForm" (ngSubmit)="onSubmit()">
+      <div class="form-group mb-4">
+        <label for="id_depot" class="block mb-2 text-sm font-medium text-gray-900">Depot</label>
+        <select formControlName="id_depot" id="id_depot" class="form-control">
+          <option value="">Choose a depot</option>
+          <option *ngFor="let depot of depots" [value]="depot.id">{{ depot.lib_depot }}</option>
+        </select>
+      </div>
+  
+      <div class="form-group mb-4">
+        <label for="dateliv" class="block mb-2 text-sm font-medium text-gray-900">Date de Livraison</label>
+        <input type="date" id="dateliv" formControlName="dateliv" class="form-control" required>
+      </div>
+  
+      <div class="form-group mb-4">
+        <label for="id_section" class="block mb-2 text-sm font-medium text-gray-900">Section</label>
+        <select formControlName="id_section" id="id_section" class="form-control">
+          <option value="">Choose a Section</option>
+          <option *ngFor="let section of Sections" [value]="section.id">{{ section.libelle }}</option>
+        </select>
+      </div>
+  
+      <div class="form-group mb-4">
+        <label for="id_modepayement" class="block mb-2 text-sm font-medium text-gray-900">Mode de Paiement</label>
+        <select formControlName="id_modepayement" id="id_modepayement" class="form-control">
+          <option value="">Choose a Payment Mode</option>
+          <option *ngFor="let modePayement of modePayements" [value]="modePayement.id">{{ modePayement.libelle }}</option>
+        </select>
+      </div>
+  
+      <div class="form-group mb-4">
+        <label for="dateheurecloture" class="block mb-2 text-sm font-medium text-gray-900">Date et Heure de Clôture</label>
+        <input type="datetime-local" id="dateheurecloture" formControlName="dateheurecloture" class="form-control" required>
+      </div>
+  
+      <div class="form-group mb-4">
+        <label for="groupe" class="block mb-2 text-sm font-medium text-gray-900">Groupe</label>
+        <input type="text" id="groupe" formControlName="groupe" class="form-control" required>
+      </div>
+  
+      <div class="form-group mb-4">
+        <label for="id_status" class="block mb-2 text-sm font-medium text-gray-900">Statut Commande</label>
+        <select formControlName="id_status" id="id_status" class="form-control">
+          <option value="">Choose a Section Commande</option>
+          <option *ngFor="let statusCommande of statusCommandes" [value]="statusCommande.id">{{ statusCommande.lib_statcmd }}</option>
+        </select>
+      </div>
+  
+      <div class="form-group mb-4">
+        <label for="id_typecommande" class="block mb-2 text-sm font-medium text-gray-900">Type Commande</label>
+        <select formControlName="id_typecommande" id="id_typecommande" class="form-control">
+          <option value="">Choose a Commande's Type</option>
+          <option *ngFor="let typeCommande of typeCommandes" [value]="typeCommande.id">{{ typeCommande.lib_typcmd }}</option>
+        </select>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Soumettre</button>
+    </form>
+  </div>
+  

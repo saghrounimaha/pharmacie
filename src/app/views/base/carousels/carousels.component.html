@@ -1,0 +1,136 @@
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong> Table Privilege Role</strong>
+      </c-card-header>
+      <c-card-body>
+        <div *ngIf="isLoading" class="spinner">Loading...</div>
+        <table [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+        <thead class="text-nowrap text-truncate">
+        <tr>
+          <th class="bg-body-tertiary text-center">is_visible ? </th>
+          <th class="bg-body-tertiary text-center">is_create ?</th>
+          <th class="bg-body-tertiary text-center">is_read ?</th>
+          <th class="bg-body-tertiary text-center">is_edit ?</th>
+          <th class="bg-body-tertiary text-center">is_delete ?</th>
+          <th class="bg-body-tertiary text-center">id_cms_privileges</th>
+          <th class="bg-body-tertiary text-center">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (privilegeRole of privilegesRole; track privilegeRole.id; let i = $index) {
+            <tr class="text-center">             
+                  <td class="text-center">
+                    <div>{{ privilegeRole.is_visible }}</div>
+                    <div class="small text-body-secondary text-nowrap">
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    {{ privilegeRole.is_create }}
+                  </td>
+                  <td class="text-center">
+                    {{ privilegeRole.is_read }}
+                  </td>
+                  <td class="text-center">
+                    {{ privilegeRole.is_edit }}
+                  </td>
+                   <td class="text-center">
+                      {{ privilegeRole.is_delete }}
+                  </td>
+                <td class="text-center">
+                  {{ privilegeRole.id_cms_privileges }}
+                </td>
+       <td class=" items-center text-center">
+          <a >
+            <button (click)="scrollToForm(); getPrivilegesRoleById(privilegeRole.id)" type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Update</button>
+          </a>
+          <button type="submit" (click)="deletePrivilegeRole(privilegeRole.id)" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+        </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+
+     
+<!-- formualireStart -->
+<form class="mt-20" [formGroup]="privilegesRoleForm" (ngSubmit)="updatePrivilegeRole()" #formSection id="formSection">
+<div class="border-b border-gray-900/10 pb-12">
+  <h2 class="text-base font-bold text-md leading-7 text-blue-700" >Privilege Role Update Form</h2>
+  <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+    <!-- is_visible ? -->
+    <div class="sm:col-span-3">
+      <label for="is_visible" class="block text-sm font-medium leading-6 text-gray-900">Is visible ?</label>
+      <div class="mt-2">
+        <input id="is_visible" 
+        formControlName="is_visible" 
+        type="text"  autocomplete="is_visible" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+      </div>
+    </div>
+    <!-- is_create -->
+    <div class="sm:col-span-3">
+      <label for="is_create" class="block text-sm font-medium leading-6 text-gray-900">Is create ?</label>
+      <div class="mt-2">
+        <input id="is_create" 
+        formControlName="is_create" 
+        type="text"  autocomplete="is_create" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+      </div>
+    </div>
+<!-- is_read -->
+    <div class="sm:col-span-3">
+      <label for="is_read" class="block text-sm font-medium leading-6 text-gray-900">Is read ?</label>
+      <div class="mt-2">
+        <input id="is_read" 
+        formControlName="is_read" 
+        type="text"  autocomplete="is_read" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+      </div>
+    </div>
+<!-- is_edit -->
+
+<div class="sm:col-span-3">
+  <label for="is_edit" class="block text-sm font-medium leading-6 text-gray-900">Is edit ?</label>
+  <div class="mt-2">
+    <input id="is_edit" 
+    formControlName="is_edit" 
+    type="text"  autocomplete="is_edit" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+  </div>
+</div>
+<!-- is_delete -->
+
+<div class="sm:col-span-3">
+  <label for="is_delete" class="block text-sm font-medium leading-6 text-gray-900">Is delete ?</label>
+  <div class="mt-2">
+    <input id="is_delete" 
+    formControlName="is_delete" 
+    type="text"  autocomplete="is_delete" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+  </div>
+</div>
+
+<div class="sm:col-span-3">
+  <label for="privileges" class="block text-sm font-medium leading-6 text-gray-900">Privileges</label>
+  <div class="mt-2">
+    <select formControlName="id_cms_privileges" id="id_cms_privileges" name="id_cms_privileges" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+      <option value="">Choose a privilege</option>
+      <option *ngFor="let privilege of privileges" [value]="privilege.id">{{ privilege.id }}</option>
+    </select>
+    <div *ngIf="privilegesRoleForm.get('id_cms_privileges')?.invalid && privilegesRoleForm.get('id_cms_privileges')?.touched">
+      CMS Privileges are required.
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>
+
+<div class="mt-6 flex items-center justify-end gap-x-6">
+<button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+<button type="submit" class="rounded-md bg-yellow-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+</div>
+</form>
+<!-- formualireEnd -->
+
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

@@ -1,0 +1,64 @@
+.table-cell {
+    padding: 8px; /* Ajouter un peu de padding pour le confort */
+    word-wrap: break-word; /* Assure que le texte long se casse correctement */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte est trop long */
+    overflow: hidden; /* Masque le texte débordant */
+  }
+  
+  .col-num {
+    width: 50px; /* Largeur fixe pour le numéro de ligne */
+  }
+
+  .col-name {
+    width: 150px; /* Ajuster selon la longueur des noms */
+  }
+
+  .col-slug, .col-subject, .col-content, .col-description, .col-from-name, .col-from-email, .col-cc-email {
+    width: 200px; /* Ajuster en fonction du contenu attendu */
+  }
+
+  /* Pour les grands textes ou colonnes spécifiques */
+  .col-content {
+    white-space: nowrap; /* Empêche le texte de se casser sur plusieurs lignes */
+  }
+  th, td {
+    text-align: center;
+    vertical-align: middle;
+    border: 5px solid rgb(239, 231, 231);
+
+  }
+
+  
+  .spinner {
+    position: fixed; /* Utilisez 'fixed' pour qu'il reste visible même pendant le défilement */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.9); /* Fond légèrement transparent */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1000; /* Assurez-vous qu'il est au-dessus des autres éléments */
+    font-size: 1.5rem; /* Taille du texte plus grande */
+    color: #333; /* Couleur du texte */
+    font-weight: bold; /* Texte en gras */
+  }
+  
+  .spinner::before {
+    content: ''; /* Crée un élément pseudo pour l'animation */
+    display: block;
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 5px solid #3498db; /* Couleur de l'animation */
+    animation: spin 1s linear infinite; /* Animation de rotation */
+    margin: 0 auto; /* Centrer le spinner */
+    margin-bottom: 10px; /* Espacement entre le spinner et le texte */
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

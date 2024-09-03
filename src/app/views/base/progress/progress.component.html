@@ -1,0 +1,70 @@
+<style>
+
+  th, td {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: middle;
+  }
+  </style>
+
+<c-row ngPreserveWhitespaces>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header>
+        <strong>Table Setting </strong>
+      </c-card-header>
+      <c-card-body>
+        <table [responsive]="true" [striped]="true" align="middle" cTable class="mb-0 border">
+        <thead class="text-nowrap text-truncate">
+        <tr style="text-align: center; vertical-align: middle; border: 5px solid rgb(239, 231, 231);">
+          <th class="bg-body-tertiary text-center">Numéro</th>
+          <th class="bg-body-tertiary text-center">name</th>
+          <th class="bg-body-tertiary text-center">content</th>
+          <th class="bg-body-tertiary text-center">content input type</th>
+          <th class="bg-body-tertiary text-center">datae num</th>
+          <th class="bg-body-tertiary text-center">helper</th>
+          <th class="bg-body-tertiary text-center">group setting</th>
+          <th class="bg-body-tertiary text-center">label</th>
+          <th class="bg-body-tertiary text-center">Action</th>
+
+
+        </tr>
+        </thead>
+
+        <tbody>
+          @for (Setting of paginatedSettings; track Setting.id; let i = $index) {
+            <tr class="text-center ">
+              <td class="text-center">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td> <!-- Numéro de ligne -->
+              <td class="text-center">{{ Setting.name }}</td>
+              <td class="text-center">{{ Setting.content }}</td>
+              <td class="text-center">{{ Setting.content_input_type }}</td>
+              <td class="text-center">{{ Setting.dataenum }}</td>
+              <td class="text-center">{{ Setting.helper }}</td>
+              <td class="text-center">{{ Setting.group_setting }}</td>
+              <td class="text-center">{{ Setting.label }}</td>
+
+              <td class="flex justify-center items-center gap-2"> <!-- Centrer les boutons -->
+                <a >
+            <!-- <button (click)="scrollToForm(); getPrivilegesRoleById(privilegeRole.id)" type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Update</button> -->
+            <button type="button" class=" text-center focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:focus:ring-yellow-900">Update</button>
+          </a>
+          <!-- <button type="submit" (click)="deletePrivilegeRole(privilegeRole.id)" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button> -->
+          <button type="submit" class=" text-center focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+        </td>
+
+            </tr>
+          }
+        </tbody>
+</table>
+
+<div class="pagination flex justify-between items-center mt-4">
+<button (click)="goToPreviousPage()" [disabled]="currentPage === 1" class="btn btn-primary">Previous</button>
+<span>Page {{ currentPage }} of {{ getTotalPages() }}</span>
+<button (click)="goToNextPage()" [disabled]="currentPage === getTotalPages()" class="btn btn-primary">Next</button>
+</div>
+
+</c-card-body>
+</c-card>
+</c-col>
+</c-row>
